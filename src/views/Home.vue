@@ -12,11 +12,25 @@
       <tr>
         <th>Taxon</th>
         <th>Imagen</th>
+        <th>Lugar</th>
         <th>Geolocalización</th>
       </tr>
       <tr v-for="item in observations" :key="item.id">
-        <td>{{ (item.taxon && item.taxon.name) ? item.taxon.name : '' }}</td>
-        <td><img height="100" :src="`${item.photos[0] && item.photos[0].url ? item.photos[0].url : '#'}`" :alt="item.uri">
+        <td>
+          <router-link :to="{
+            name: 'Observation',
+            params: {
+              id: item.id
+            }
+          }">
+            {{ (item.taxon && item.taxon.name) ? item.taxon.name : '' }}
+          </router-link>
+        </td>
+        <td><img height="100" :src="`${item.photos[0] && item.photos[0].url ? item.photos[0].url : '#'}`"
+            :alt="item.uri">
+        </td>
+        <td>
+          {{ item.place_guess }}
         </td>
         <td>
           {{ item.location }}
